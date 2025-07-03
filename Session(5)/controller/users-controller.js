@@ -30,6 +30,7 @@ const getAllUsers = asyncWrapper(async (req, res) => {
 const register = asyncWrapper(async (req, res) => {
   const { firstName, lastName, email, password,role } = req.body;
 
+
   const olduser = await User.findOne({ email });
   if (olduser)
     return res
@@ -43,7 +44,8 @@ const register = asyncWrapper(async (req, res) => {
     lastName,
     email,
     password: hashedPassword,
-    role
+    role,
+    avatar:req.file.filename
   });
   // generate jwt token
   const token=await generateJWT({email: newUser.email, id:newUser._id,role:newUser.role})

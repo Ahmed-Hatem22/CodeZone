@@ -19,7 +19,7 @@ try{
     }
     
     //console.log("token",token);
-    next(null, token);
+   // next(null, token);
 }
 
 module.exports = verifyToken;

@@ -3,6 +3,13 @@ const express=require(`express`);
 
 const router= express.Router();
 
+const multer  = require('multer')
+const userphoto=require(`../Utilis/userphoto`)
+const upload = multer({ 
+  storage: userphoto.diskStorage,
+fileFilter:userphoto.fileFilter
+});
+
 const usersController=require('../controller/users-controller');
 const verifyToken=require('../middleware/verfiyToken')
 
@@ -14,7 +21,7 @@ router.route(`/`)
 
   router.route(`/register`)
   
-  .post(usersController.register)
+  .post( upload.single('avatar'),usersController.register)
 
   router.route(`/login`)
   
